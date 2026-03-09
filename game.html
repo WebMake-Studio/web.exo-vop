@@ -13,10 +13,9 @@
   <div id="cursor"></div><div id="cursor-ring"></div> 
   <canvas id="stars-canvas"></canvas>
 
-  <!-- ── Navbar ── -->
   <nav id="navbar">
     <a class="nav-logo" href="/index">
-      <img src="media/logo-exo-VOP.png" alt="Logo Exo VOP" class="nav-logo-box" /> 
+      <img src="media/logo-exo-vop.png" alt="Logo Exo VOP" class="nav-logo-box" /> 
       <span class="nav-logo-text">EXO <span>VOP</span></span>
     </a>
     <ul class="nav-links">
@@ -46,7 +45,6 @@
 
   <div class="page-wrapper">
 
-    <!-- ── Page Header ── -->
     <div class="page-header">
       <div class="page-header-grid"></div>
       <div class="page-header-glow"></div>
@@ -62,10 +60,8 @@
       </div>
     </div>
 
-    <!-- ── Game Cards (chargées dynamiquement depuis Supabase) ── -->
     <section class="game-info-section">
       <div class="game-info-grid" id="games-grid">
-        <!-- loader -->
         <div style="grid-column:1/-1;display:flex;flex-direction:column;align-items:center;gap:16px;padding:60px 0">
           <div class="loader"></div>
           <p style="color:var(--text-dim);font-size:.88rem" data-i18n="gp_loading_games">Chargement des jeux...</p>
@@ -73,14 +69,12 @@
       </div>
     </section>
 
-    <!-- ── Announcements ── -->
     <section class="games-section">
       <div style="margin-bottom:36px">
         <p class="section-label reveal"><span data-i18n="gp_ann_label">📢 Annonces</span></p>
         <h2 class="section-title reveal reveal-delay-1" data-i18n="gp_ann_title">Dernières <span class="c">nouveautés</span></h2>
       </div>
 
-      <!-- Filter Tabs -->
       <div class="game-tabs">
         <button class="tab-btn all active" data-filter="all" onclick="setFilter('all')">
           <span data-i18n="gp_tab_all">Toutes les annonces</span>
@@ -93,11 +87,9 @@
         </button>
       </div>
 
-      <!-- Grid — populated by games.js -->
       <div class="announcements-grid" id="announcements-grid"></div>
     </section>
 
-    <!-- ── Footer ── -->
     <footer>
       <div class="footer-inner">
         <a class="footer-logo" href="/index">EXO <span>VOP</span></a>

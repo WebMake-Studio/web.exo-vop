@@ -18,10 +18,9 @@
   <div id="cursor-ring"></div>
   <canvas id="stars-canvas"></canvas>
 
-  <!-- ── Navbar ── -->
   <nav id="navbar">
     <a class="nav-logo" href="/index">
-      <img src="media/logo-exo-VOP.png" alt="Logo Exo VOP" class="nav-logo-box" />
+      <img src="media/logo-exo-vop.png" alt="Logo Exo VOP" class="nav-logo-box" />
       <span class="nav-logo-text">EXO <span>VOP</span></span>
     </a>
     <ul class="nav-links">
@@ -47,7 +46,6 @@
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobile-menu">
     <a href="/index" onclick="toggleMobileMenu()" data-i18n="nav_home">Accueil</a>
     <a href="/game" onclick="toggleMobileMenu()" data-i18n="nav_games">Jeux</a>
@@ -55,7 +53,6 @@
     <a href="contact" onclick="toggleMobileMenu()" data-i18n="nav_contact">Contact</a>
   </div>
 
-  <!-- ── HERO ── -->
   <section id="hero">
     <div class="hero-grid-lines"></div>
     <div class="hero-glow-top"></div>
@@ -65,7 +62,7 @@
         <span data-i18n="hero_badge">Studio Roblox Indépendant</span>
       </div>
       <div class="hero-logo-area">
-        <img src="media/logo-exo-VOP.png" alt="Logo Exo VOP" class="hero-logo" />
+        <img src="media/logo-exo-vop.png" alt="Logo Exo VOP" class="hero-logo" />
       </div>
       <h1 class="hero-title">
         <span class="cyan">EXO</span> <span class="violet">VOP</span>
@@ -83,7 +80,6 @@
     </div>
   </section>
 
-  <!-- ── Stats ── -->
   <div class="stats-banner">
     <div class="stat-item reveal">
       <div class="stat-number">2</div>
@@ -102,8 +98,7 @@
       <div class="stat-label" data-i18n="stat_indie">Indépendant</div>
     </div>
   </div>
-
-  <!-- ── Games Preview ── -->
+  
   <section class="home-games">
     <div class="section-header center">
       <p class="section-label reveal"><span data-i18n="games_label">Nos créations</span></p>
@@ -112,9 +107,7 @@
       <p class="section-sub reveal reveal-delay-2" data-i18n="games_sub">Deux expériences uniques sur Roblox, conçues
         avec passion par l'équipe Exo VOP.</p>
     </div>
-    <!-- Grid chargée dynamiquement — max 2 jeux -->
     <div class="games-preview-grid" id="home-games-grid">
-      <!-- Skeleton loaders -->
       <div class="game-preview-card cyan" style="opacity:.35;pointer-events:none">
         <div class="game-banner">
           <div class="game-banner-glow"></div>
@@ -130,7 +123,6 @@
     </div>
   </section>
 
-  <!-- ── Team Preview ── -->
   <section class="home-team">
     <div class="section-header center" style="margin-bottom:48px">
       <p class="section-label vio reveal"><span data-i18n="team_label">Les bâtisseurs</span></p>
@@ -145,7 +137,6 @@
     </div>
   </section>
 
-  <!-- ── Footer ── -->
   <footer>
     <div class="footer-inner">
       <a class="footer-logo" href="/index">EXO <span>VOP</span></a>
@@ -181,7 +172,6 @@
     </div>
   </footer>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="asset/js/config.js"></script>
   <script src="asset/js/global.js"></script>
