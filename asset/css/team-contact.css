@@ -1,0 +1,166 @@
+.team-section { padding: 60px 5vw 100px; background: var(--bg2); }
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px;
+}
+.team-card {
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  border: 1px solid rgba(123,47,255,0.15);
+  padding: 32px 22px; text-align: center;
+  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  cursor: none; position: relative; overflow: hidden;
+  animation: cardIn .4s ease both;
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.team-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(123,47,255,0.45);
+  box-shadow: 0 14px 50px rgba(0,0,0,0.4), var(--glow-vio);
+}
+.team-avatar {
+  width: 76px; height: 76px; border-radius: 50%;
+  margin: 0 auto 18px;
+  border: 2px solid rgba(123,47,255,0.4);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-head); font-size: 1.5rem; font-weight: 900;
+  background: rgba(123,47,255,0.1); color: var(--violet);
+  position: relative; overflow: hidden;
+}
+.team-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.team-avatar-ring {
+  position: absolute; inset: -6px; border-radius: 50%;
+  border: 1.5px solid rgba(123,47,255,0.25);
+  pointer-events: none;
+  animation: rotateBorder 8s linear infinite;
+}
+@keyframes rotateBorder {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.team-name {
+  font-family: var(--font-head); font-size: .95rem; font-weight: 700;
+  color: var(--white); letter-spacing: 1px; margin-bottom: 5px;
+}
+.team-role {
+  font-size: .75rem; color: var(--violet);
+  letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px;
+  font-weight: 600;
+}
+.team-desc { font-size: .83rem; color: var(--text-dim); line-height: 1.65; }
+
+.team-join-card {
+  border-radius: var(--radius);
+  background: transparent;
+  border: 1.5px dashed rgba(123,47,255,0.22);
+  padding: 32px 22px; text-align: center;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 14px;
+  min-height: 220px; cursor: none;
+  transition: border-color var(--transition);
+  text-decoration: none;
+}
+.team-join-card:hover { border-color: rgba(123,47,255,0.6); }
+.team-join-icon {
+  width: 50px; height: 50px; border-radius: 50%;
+  background: rgba(123,47,255,0.08);
+  border: 1px solid rgba(123,47,255,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; color: var(--violet);
+}
+.team-join-text {
+  font-family: var(--font-head); font-size: .7rem;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+@media (max-width: 600px) {
+  .team-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 400px) {
+  .team-grid { grid-template-columns: 1fr; }
+}
+
+.contact-section { padding: 60px 5vw 100px; background: var(--bg2); }
+
+.contact-wrapper {
+  display: grid; grid-template-columns: 1fr 1.2fr;
+  gap: 60px; align-items: start;
+}
+.contact-links { display: flex; flex-direction: column; gap: 14px; margin-bottom: 40px; }
+.contact-link-item {
+  display: flex; align-items: center; gap: 16px;
+  padding: 18px 20px; border-radius: var(--radius);
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  text-decoration: none; color: var(--text); cursor: none;
+  transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.contact-link-item:hover {
+  border-color: rgba(0,229,255,0.35);
+  transform: translateX(6px);
+  box-shadow: 0 4px 20px rgba(0,229,255,0.07);
+}
+.contact-link-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.contact-link-icon.discord { background: rgba(88,101,242,0.15); color: #5865f2; }
+.contact-link-icon.roblox  { background: rgba(0,229,255,0.1);   color: var(--cyan); }
+.contact-link-info { flex: 1; }
+.contact-link-name { font-family: var(--font-head); font-size: .82rem; font-weight: 700; color: var(--white); }
+.contact-link-sub  { font-size: .78rem; color: var(--text-dim); margin-top: 2px; }
+.contact-link-arrow { color: var(--text-dim); transition: transform var(--transition), color var(--transition); }
+.contact-link-item:hover .contact-link-arrow { transform: translateX(4px); color: var(--cyan); }
+
+.contact-form { display: flex; flex-direction: column; gap: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 7px; }
+.form-group label {
+  font-family: var(--font-head); font-size: .65rem;
+  letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-dim);
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 9px; padding: 12px 15px;
+  color: var(--white); font-family: var(--font-body);
+  font-size: .9rem; outline: none; resize: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--text-dim); }
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: rgba(0,229,255,0.4);
+  box-shadow: 0 0 0 3px rgba(0,229,255,0.07);
+}
+.form-group select option { background: var(--bg2); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.btn-submit {
+  padding: 13px 30px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+  color: var(--bg); font-family: var(--font-head);
+  font-size: .78rem; font-weight: 700; letter-spacing: 1.5px;
+  border: none; cursor: none; align-self: flex-start;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+.btn-submit:hover {
+  box-shadow: 0 0 30px rgba(0,229,255,0.35), 0 0 60px rgba(123,47,255,0.2);
+  transform: translateY(-2px);
+}
+.btn-submit:disabled { opacity: .5; pointer-events: none; }
+
+@media (max-width: 900px) {
+  .contact-wrapper { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 500px) {
+  .form-row { grid-template-columns: 1fr; }
+}
