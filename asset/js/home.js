@@ -1,10 +1,3 @@
-/* ================================================================
-   EXO VOP — js/home.js
-   Chargement dynamique des jeux sur la page d'accueil (max 2)
-   © 2025 Rafael ISTE / FarTekTV
-   ================================================================ */
-
-/* Palette couleur — correspondance index → classe CSS */
 const HOME_PALETTES = ['cyan', 'red', 'violet', 'green'];
 
 async function loadHomeGames() {
@@ -22,7 +15,7 @@ async function loadHomeGames() {
         .select('id, name, slug, genre, description, roblox_url, sort_order')
         .eq('active', true)
         .order('sort_order', { ascending: true })
-        .limit(2);  /* ← on ne récupère que les 2 premiers */
+        .limit(2);
       if (error) throw error;
       gamesData = data && data.length ? data : getHomeGamesDemo();
     } catch (err) {
@@ -38,7 +31,6 @@ function renderHomeGames(gamesData) {
   const grid = document.getElementById('home-games-grid');
   if (!grid) return;
 
-  /* Toujours afficher exactement 2 cartes */
   const items = gamesData.slice(0, 2);
 
   grid.innerHTML = items.map((g, i) => {
@@ -73,7 +65,6 @@ function renderHomeGames(gamesData) {
       </div>`;
   }).join('');
 
-  /* Appliquer i18n sur les éventuels data-i18n générés */
   if (typeof setLang === 'function') setLang(currentLang);
 }
 
@@ -101,12 +92,10 @@ function getHomeGamesDemo() {
   ];
 }
 
-/* ── i18n hook — rerender si changement de langue ── */
 const _origOnLangChange = typeof onLangChange === 'function' ? onLangChange : null;
 function onLangChange(lang) {
   if (_origOnLangChange) _origOnLangChange(lang);
   loadHomeGames();
 }
 
-/* ── Init ── */
 document.addEventListener('DOMContentLoaded', loadHomeGames);

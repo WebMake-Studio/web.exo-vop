@@ -270,9 +270,6 @@ async function deleteAnnouncement(id) {
   loadAdminAnnouncements();
 }
 
-/* ══════════════════════════════════════════════
-   TEAM MEMBERS
-══════════════════════════════════════════════ */
 let teamMembers  = [];
 let editingMembId = null;
 
@@ -382,7 +379,6 @@ async function deleteMember(id) {
   loadAdminTeam();
 }
 
-/* ── Helpers ── */
 function formatDate(dateStr) {
   if (!dateStr) return '';
   return new Date(dateStr).toLocaleDateString('fr-FR', { day:'2-digit', month:'short', year:'numeric' });
@@ -396,7 +392,6 @@ function showAdminError(msg) {
   if (main) main.innerHTML = `<div style="padding:40px;color:var(--red);font-family:var(--font-head);">${msg}</div>`;
 }
 
-/* ── Close modal on overlay click ── */
 document.addEventListener('click', e => {
   if (e.target.classList.contains('modal-overlay')) {
     closeAnnModal();
@@ -405,9 +400,6 @@ document.addEventListener('click', e => {
   }
 });
 
-/* ══════════════════════════════════════════════
-   CONTACT MESSAGES
-══════════════════════════════════════════════ */
 let contactMessages  = [];
 let currentMsgId     = null;
 let currentMsgEmail  = null;
@@ -424,7 +416,6 @@ async function loadAdminMessages() {
     return;
   }
 
-  /* Vérifier la session avant la requête */
   const { data: { session } } = await db.auth.getSession();
   if (!session) {
     tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--red)">
@@ -538,7 +529,6 @@ async function deleteMessage(id) {
   loadAdminMessages();
 }
 
-/* ── Demo messages ── */
 function getDemoMessages() {
   return [
     { id:'m1', name:'LunaPlays', email:'luna@example.com', subject:'Collaboration', message:'Bonjour, je suis streameuse et j\'aimerais collaborer avec votre studio pour faire la promotion de Silix RP sur ma chaîne. Intéressés ?', created_at: new Date(Date.now()-86400000*1).toISOString() },
@@ -548,13 +538,9 @@ function getDemoMessages() {
 }
 
 
-/* ══════════════════════════════════════════════
-   JEUX
-══════════════════════════════════════════════ */
 let games        = [];
 let editingGameId = null;
 
-/* couleurs auto selon l'index */
 const GAME_COLORS = ['var(--cyan)','var(--red)','var(--violet)','var(--green)','#ff9f00','#a855f7'];
 const GAME_BG     = ['rgba(0,229,255,.08)','rgba(255,61,90,.08)','rgba(123,47,255,.08)','rgba(0,255,136,.08)','rgba(255,159,0,.08)','rgba(168,85,247,.08)'];
 const GAME_BORDER = ['rgba(0,229,255,.2)','rgba(255,61,90,.2)','rgba(123,47,255,.2)','rgba(0,255,136,.2)','rgba(255,159,0,.2)','rgba(168,85,247,.2)'];
@@ -635,7 +621,6 @@ function renderGamesTable() {
 function updateGamesOverview() {
   updateStatCount('stat-games-count', games.length);
 
-  /* Mettre à jour la mini-liste dans l'onglet Vue d'ensemble */
   const list = document.getElementById('overview-games-list');
   if (!list) return;
 
@@ -663,7 +648,6 @@ function updateStatCount(id, n) {
   if (el) el.textContent = n;
 }
 
-/* ── Modal ── */
 function openGameModal(mode, id) {
   const form = document.getElementById('form-game');
   form.reset();
@@ -710,7 +694,6 @@ async function saveGame() {
   if (!name) { showToast('Le nom du jeu est obligatoire.', 'error'); return; }
   if (!slug) { showToast('Le slug est obligatoire.', 'error'); return; }
 
-  /* mode démo */
   if (!db) {
     if (editingGameId) {
       const idx = games.findIndex(x => x.id === editingGameId);
@@ -760,19 +743,17 @@ async function deleteGame(id) {
   loadAdminGames();
 }
 
-/* auto-slug depuis le nom */
 document.addEventListener('DOMContentLoaded', () => {
   const formGame = document.getElementById('form-game');
   if (!formGame) return;
   const nameInput = formGame.elements['name'];
   const slugInput = formGame.elements['slug'];
   nameInput.addEventListener('input', () => {
-    if (editingGameId) return; /* ne pas écraser en mode édition */
+    if (editingGameId) return;
     slugInput.value = nameInput.value.toLowerCase().trim().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
   });
 });
 
-/* ── Demo games ── */
 function getDemoGames() {
   return [
     { id:'dg1', name:'Silix RP',        slug:'silix_rp',        genre:'Jeu de rôle',   description:'Un RP futuriste.', roblox_url:'https://www.roblox.com/games/', max_players:20, active:true, sort_order:0, created_at:new Date().toISOString() },
@@ -780,7 +761,6 @@ function getDemoGames() {
   ];
 }
 
-/* ── Init dashboard ── */
 document.addEventListener('DOMContentLoaded', async () => {
   const isDashboard = document.getElementById('tab-overview');
   if (isDashboard) {

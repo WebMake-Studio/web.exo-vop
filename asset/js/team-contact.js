@@ -70,12 +70,6 @@ function escHtml(str) {
 
 document.addEventListener('DOMContentLoaded', loadTeamMembers);
 
-
-/* ================================================================
-   EXO VOP — asset/asset/jscontact.js
-   Gestion du formulaire de contact
-   ================================================================ */
-
 (function initContact() {
   const form = document.getElementById('contact-form');
   if (!form) return;
@@ -94,7 +88,6 @@ document.addEventListener('DOMContentLoaded', loadTeamMembers);
       created_at: new Date().toISOString()
     };
 
-    // Basic validation
     if (!data.name || !data.email || !data.message) {
       showToast('Tous les champs sont requis.', 'error');
       btn.disabled = false;
@@ -103,18 +96,15 @@ document.addEventListener('DOMContentLoaded', loadTeamMembers);
       return;
     }
 
-    // Try to save to Supabase (table 'contact_messages')
     if (db) {
       try {
         const { error } = await db.from('contact_messages').insert([data]);
         if (error) throw error;
       } catch (err) {
         console.error('Contact error:', err);
-        // Continue — show success anyway (or could show error)
       }
     }
 
-    // Success feedback
     showToast(currentLang === 'fr'
       ? '✓ Message envoyé ! Nous vous répondrons rapidement.'
       : '✓ Message sent! We\'ll get back to you soon.', 'success');

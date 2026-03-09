@@ -1,16 +1,6 @@
-/* ================================================================
-   EXO VOP — asset/js/games.js
-   Chargement des annonces depuis Supabase
-   © 2025 Rafael ISTE / FarTekTV
-   ================================================================ */
-
 let allAnnouncements = [];
 let activeFilter = 'all';
 
-
-/* ══════════════════════════════════════════════
-   CHARGEMENT DES JEUX DEPUIS SUPABASE
-══════════════════════════════════════════════ */
 const GAME_PALETTE = [
   { color: 'var(--cyan)', bg: 'rgba(0,229,255,.08)',  border: 'rgba(0,229,255,.25)',  cls: 'cyan' },
   { color: 'var(--red)',  bg: 'rgba(255,61,90,.08)',   border: 'rgba(255,61,90,.25)',  cls: 'red'  },
@@ -63,7 +53,6 @@ function renderGamesPublic(gamesData) {
     return;
   }
 
-  /* Après injection du HTML, forcer la visibilité des éléments reveal */
   const forceReveal = () => {
     grid.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
   };
@@ -72,10 +61,9 @@ function renderGamesPublic(gamesData) {
     const pal = GAME_PALETTE[i % GAME_PALETTE.length];
     const ini = (g.name || '?').charAt(0).toUpperCase();
     const features = g.description
-      ? ''  /* si pas de features array, on affiche juste la description */
+      ? ''
       : '';
 
-    /* Découper la description en features si elle contient des "\n" */
     let featureList = '';
     if (g.features && Array.isArray(g.features)) {
       featureList = g.features.map(f =>
@@ -115,23 +103,18 @@ function renderGamesPublic(gamesData) {
       </div>`;
   }).join('');
 
-  /* Forcer la visibilité après injection dynamique */
   requestAnimationFrame(forceReveal);
 }
 
-/* Met à jour les onglets de filtre des annonces selon les jeux actifs */
 function updateAnnouncementFilters(gamesData) {
   const tabsEl = document.querySelector('.game-tabs');
   if (!tabsEl || !gamesData.length) return;
 
-  /* Conserver le bouton "Toutes les annonces" */
   const allBtn = tabsEl.querySelector('[data-filter="all"]');
   if (!allBtn) return;
 
-  /* Supprimer les anciens boutons spécifiques */
   tabsEl.querySelectorAll('[data-filter]:not([data-filter="all"])').forEach(b => b.remove());
 
-  /* Ajouter un bouton par jeu */
   gamesData.forEach(g => {
     const btn = document.createElement('button');
     btn.className = 'tab-btn';
@@ -142,7 +125,6 @@ function updateAnnouncementFilters(gamesData) {
   });
 }
 
-/* Filtre les annonces par slug de jeu */
 function setFilterBySlug(slug) {
   activeFilter = slug;
   document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -166,7 +148,6 @@ function getDemoGamesPublic() {
   ];
 }
 
-/* ── Fetch announcements ── */
 async function loadAnnouncements() {
   const grid = document.getElementById('announcements-grid');
   if (!grid) return;
@@ -178,7 +159,6 @@ async function loadAnnouncements() {
     </div>`;
 
   if (!db) {
-    // Demo data if Supabase not configured
     allAnnouncements = getDemoAnnouncements();
     renderAnnouncements();
     return;
@@ -201,7 +181,6 @@ async function loadAnnouncements() {
   }
 }
 
-/* ── Filter tabs ── */
 function setFilter(filter) {
   activeFilter = filter;
   document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -210,7 +189,6 @@ function setFilter(filter) {
   renderAnnouncements();
 }
 
-/* ── Render ── */
 function renderAnnouncements() {
   const grid = document.getElementById('announcements-grid');
   if (!grid) return;
@@ -246,7 +224,6 @@ function renderAnnouncements() {
     </div>`).join('');
 }
 
-/* ── Helpers ── */
 function gameEmoji(game) {
   return { silix_rp: '🏙️', kill_a_monster: '⚔️', general: '📢' }[game] || '📢';
 }
@@ -265,7 +242,6 @@ function escHtml(str) {
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-/* ── Demo data (when Supabase not configured) ── */
 function getDemoAnnouncements() {
   return [
     {
@@ -301,20 +277,15 @@ function getDemoAnnouncements() {
   ];
 }
 
-/* ── i18n update hook ── */
 function onLangChange(lang) {
-  /* Re-render tout en nouvelle langue */
   renderAnnouncements();
-  /* Recharger les cartes jeux dynamiques (contiennent du t()) */
   const grid = document.getElementById('games-grid');
   if (grid && grid.children.length > 0 && !grid.querySelector('.loader')) {
     loadGames();
   }
-  /* Mettre à jour les data-i18n dans la section annonces qui sont injectés dynamiquement */
 }
 
-/* ── Init ── */
 document.addEventListener('DOMContentLoaded', () => {
-  loadGames();       /* cartes de jeux dynamiques */
-  loadAnnouncements(); /* annonces */
+  loadGames();
+  loadAnnouncements();
 });

@@ -1,10 +1,3 @@
-/* ================================================================
-   EXO VOP — asset/asset/js/global.js
-   Fonctions partagées : curseur, étoiles, navbar, i18n, reveal
-   © 2025 Rafael ISTE / FarTekTV
-   ================================================================ */
-
-/* ── Custom Cursor ── */
 (function initCursor() {
   const cursor = document.getElementById('cursor');
   const ring   = document.getElementById('cursor-ring');
@@ -45,13 +38,6 @@
   });
 })();
 
-/* ================================================================
-   EXO VOP — asset/js/global.js
-   Fonctions partagées : curseur, étoiles, navbar, i18n, reveal
-   © 2025 Rafael ISTE / FarTekTV
-   ================================================================ */
-
-/* ── Stars Canvas ── */
 (function initStars() {
   const canvas = document.getElementById('stars-canvas');
   if (!canvas) return;
@@ -88,7 +74,6 @@
   window.addEventListener('resize', () => { resize(); create(); });
 })();
 
-/* ── Navbar scroll ── */
 (function initNavbar() {
   const nav = document.getElementById('navbar');
   if (!nav) return;
@@ -96,7 +81,6 @@
     nav.classList.toggle('scrolled', window.scrollY > 20);
   });
 
-  // Active link based on current page
   const path = window.location.pathname.split('/').pop() || '/index';
   document.querySelectorAll('.nav-links a').forEach(a => {
     const href = a.getAttribute('href');
@@ -108,7 +92,6 @@
   });
 })();
 
-/* ── Mobile menu ── */
 function toggleMobileMenu() {
   const menu  = document.getElementById('mobile-menu');
   const burge = document.getElementById('hamburger');
@@ -117,7 +100,6 @@ function toggleMobileMenu() {
   burge.classList.toggle('open');
 }
 
-/* ── Scroll reveal ── */
 (function initReveal() {
   const els = document.querySelectorAll('.reveal');
   const obs = new IntersectionObserver(entries => {
@@ -126,7 +108,6 @@ function toggleMobileMenu() {
   els.forEach(el => obs.observe(el));
 })();
 
-/* ── Toast notifications ── */
 function showToast(message, type = 'success') {
   let container = document.getElementById('toast-container');
   if (!container) {
@@ -146,27 +127,21 @@ function showToast(message, type = 'success') {
   }, 3500);
 }
 
-/* ── i18n System ── */
 const translations = {
   fr: {
-    // Navigation
     nav_home:    'Accueil',
     nav_games:   'Jeux',
     nav_team:    'Équipe',
     nav_contact: 'Contact',
-    logo_placeholder: 'Votre logo ici',
-    // Hero
     hero_badge:   'Studio Roblox Indépendant',
     hero_tagline: 'Créateurs de mondes. Bâtisseurs d\'expériences.',
     hero_cta1:   'Découvrir nos jeux',
     hero_cta2:   'Rejoindre Discord',
     scroll:       'SCROLL',
-    // Stats
     stat_games:  'Jeux actifs',
     stat_passion:'Passion',
     stat_studio: 'Studio',
     stat_indie:  'Indépendant',
-    // Games section
     games_label: 'Nos créations',
     games_title: 'Plonge dans nos univers',
     games_sub:   'Deux expériences uniques sur Roblox, conçues avec passion par l\'équipe Exo VOP.',
@@ -177,7 +152,6 @@ const translations = {
     btn_play:    'Jouer maintenant',
     btn_details: 'En savoir plus →',
     meta_roblox: 'Disponible sur Roblox',
-    // Team
     team_label:  'Les bâtisseurs',
     team_title:  'Notre équipe',
     team_sub:    'Des passionnés qui mettent leur talent au service de chaque expérience de jeu.',
@@ -188,7 +162,6 @@ const translations = {
     role_builder:'Builder / 3D',
     role_builder_desc: 'Donne vie aux environnements et aux maps.',
     team_join:   'Rejoindre l\'équipe',
-    // Contact
     contact_label:'Nous contacter',
     contact_title:'Rejoins l\'aventure',
     contact_sub:  'Une question, une collaboration ou envie de rejoindre l\'équipe ? On est là.',
@@ -204,10 +177,8 @@ const translations = {
     form_subject_opt4:'Autre',
     form_message: 'Message',
     form_send:    'Envoyer →',
-    // Footer
     footer_rights:'Tous droits réservés.',
     footer_disc:  'Studio indépendant non affilié à Roblox Corporation.',
-    // Games page
     gp_label:    'Nos jeux',
     gp_title:    'Les jeux Exo VOP',
     gp_sub:      'Découvrez nos créations disponibles sur Roblox.',
@@ -216,28 +187,22 @@ const translations = {
     gp_tab_kam:  'Kill a Monster',
     gp_no_ann:   'Aucune annonce pour le moment.',
     gp_loading:  'Chargement des annonces...',
-    // Team page
     tp_label:    'Notre studio',
     tp_title:    'L\'équipe Exo VOP',
     tp_sub:      'Les personnes derrière chaque ligne de code et chaque monde construit.',
     tp_loading:  'Chargement de l\'équipe...',
     tp_no_team:  'Aucun membre pour le moment.',
-    // Nav
     nav_discord: 'Discord',
-    // Games page — section annonces
     gp_loading_games: 'Chargement des jeux...',
     gp_ann_label:     '📢 Annonces',
     gp_ann_title:     'Dernières <span class="c">nouveautés</span>',
-    // Contact page — noms des liens
     contact_discord_name: 'Discord',
     contact_roblox_name:  'Groupe Roblox',
-    // Jeux dynamiques (games.js)
     gp_no_games:    'Aucun jeu disponible pour le moment.',
     gp_play_now:    'Jouer maintenant',
     gp_roblox_link: 'Voir sur Roblox',
     gp_no_roblox:   'Lien Roblox non configuré',
     gp_players_max: 'joueurs max',
-    // Titres avec spans colorés (innerHTML)
     hero_title:         'Créateurs de <span class="c">mondes</span>.',
     games_title_html:   'Plonge dans nos <span class="c">univers</span>',
     team_title_html:    'Notre <span class="v">équipe</span>',
@@ -310,22 +275,17 @@ const translations = {
     tp_sub:      'The people behind every line of code and every world built.',
     tp_loading:  'Loading team...',
     tp_no_team:  'No members yet.',
-    // Nav
     nav_discord: 'Discord',
-    // Games page — section announcements
     gp_loading_games: 'Loading games...',
     gp_ann_label:     '📢 Announcements',
     gp_ann_title:     'Latest <span class="c">updates</span>',
-    // Contact page — link names
     contact_discord_name: 'Discord',
     contact_roblox_name:  'Roblox Group',
-    // Dynamic games (games.js)
     gp_no_games:    'No games available yet.',
     gp_play_now:    'Play now',
     gp_roblox_link: 'View on Roblox',
     gp_no_roblox:   'Roblox link not configured',
     gp_players_max: 'max players',
-    // Titles with colored spans (innerHTML)
     hero_title:         'World <span class="c">creators</span>.',
     games_title_html:   'Dive into our <span class="c">worlds</span>',
     team_title_html:    'Our <span class="v">team</span>',
@@ -356,12 +316,10 @@ function setLang(lang) {
     } else if (el.tagName === 'OPTION') {
       el.textContent = val;
     } else {
-      /* innerHTML pour conserver les <span> colorés à l'intérieur des titres */
       el.innerHTML = val;
     }
   });
 
-  // Trigger page-specific i18n updates
   if (typeof onLangChange === 'function') onLangChange(lang);
 }
 
@@ -369,7 +327,6 @@ function t(key) {
   return translations[currentLang]?.[key] || translations['fr']?.[key] || key;
 }
 
-// Init on load
 document.addEventListener('DOMContentLoaded', () => {
   setLang(currentLang);
 });
