@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Exo VOP — Studio Roblox indépendant créateur de Silix RP et Kill a Monster." />
+  <meta property="og:title" content="Exo VOP — Studio Roblox" />
+  <meta property="og:description" content="Créateurs de mondes. Bâtisseurs d'expériences." />
+  <title>Exo VOP — Studio Roblox</title>
+  <link rel="stylesheet" href="asset/css/global.css" />
+  <link rel="stylesheet" href="asset/css/home.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="media/logo-exo-vop(nobackground).png" />
+</head>
+
+<body>
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+  <canvas id="stars-canvas"></canvas>
+
+  <!-- ── Navbar ── -->
+  <nav id="navbar">
+    <a class="nav-logo" href="/index">
+      <img src="media/logo-exo-VOP.png" alt="Logo Exo VOP" class="nav-logo-box" />
+      <span class="nav-logo-text">EXO <span>VOP</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="./index.html"   data-i18n="nav_home">Accueil</a></li>
+      <li><a href="./game.html"    data-i18n="nav_games">Jeux</a></li>
+      <li><a href="./team.html"    data-i18n="nav_team">Équipe</a></li>
+      <li><a href="./contact.html" data-i18n="nav_contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="lang-toggle">
+        <button id="btn-fr" class="active" onclick="setLang('fr')">FR</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+      <a class="btn-discord-nav" href="https://discord.gg/nHxq4ssHjT" target="_blank" rel="noopener noreferrer">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+          <path
+            d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026c.462-.62.874-1.275 1.226-1.963a.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028z" />
+        </svg>
+        <span data-i18n="nav_discord">Discord</span>
+      </a>
+      <button class="hamburger" id="hamburger"
+        onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/index" onclick="toggleMobileMenu()" data-i18n="nav_home">Accueil</a>
+    <a href="/game" onclick="toggleMobileMenu()" data-i18n="nav_games">Jeux</a>
+    <a href="/team" onclick="toggleMobileMenu()" data-i18n="nav_team">Équipe</a>
+    <a href="contact" onclick="toggleMobileMenu()" data-i18n="nav_contact">Contact</a>
+  </div>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-grid-lines"></div>
+    <div class="hero-glow-top"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        <span data-i18n="hero_badge">Studio Roblox Indépendant</span>
+      </div>
+      <div class="hero-logo-area">
+        <img src="media/logo-exo-VOP.png" alt="Logo Exo VOP" class="hero-logo" />
+      </div>
+      <h1 class="hero-title">
+        <span class="cyan">EXO</span> <span class="violet">VOP</span>
+      </h1>
+      <p class="hero-tagline" data-i18n="hero_tagline">Créateurs de mondes. Bâtisseurs d'expériences.</p>
+      <div class="hero-cta">
+        <a class="btn-primary" href="/game" data-i18n="hero_cta1">Découvrir nos jeux</a>
+        <a class="btn-outline" href="https://discord.gg/nHxq4ssHjT" target="_blank" rel="noopener noreferrer"
+          data-i18n="hero_cta2">Rejoindre Discord</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span class="hero-scroll-label" data-i18n="scroll">SCROLL</span>
+      <div class="scroll-mouse"></div>
+    </div>
+  </section>
+
+  <!-- ── Stats ── -->
+  <div class="stats-banner">
+    <div class="stat-item reveal">
+      <div class="stat-number">2</div>
+      <div class="stat-label" data-i18n="stat_games">Jeux actifs</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-1">
+      <div class="stat-number">∞</div>
+      <div class="stat-label" data-i18n="stat_passion">Passion</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-2">
+      <div class="stat-number">1</div>
+      <div class="stat-label" data-i18n="stat_studio">Studio</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-3">
+      <div class="stat-number">100%</div>
+      <div class="stat-label" data-i18n="stat_indie">Indépendant</div>
+    </div>
+  </div>
+
+  <!-- ── Games Preview ── -->
+  <section class="home-games">
+    <div class="section-header center">
+      <p class="section-label reveal"><span data-i18n="games_label">Nos créations</span></p>
+      <h2 class="section-title reveal reveal-delay-1" data-i18n="games_title_html">Plonge dans nos <span
+          class="c">univers</span></h2>
+      <p class="section-sub reveal reveal-delay-2" data-i18n="games_sub">Deux expériences uniques sur Roblox, conçues
+        avec passion par l'équipe Exo VOP.</p>
+    </div>
+    <!-- Grid chargée dynamiquement — max 2 jeux -->
+    <div class="games-preview-grid" id="home-games-grid">
+      <!-- Skeleton loaders -->
+      <div class="game-preview-card cyan" style="opacity:.35;pointer-events:none">
+        <div class="game-banner">
+          <div class="game-banner-glow"></div>
+        </div>
+        <div class="game-card-body" style="height:120px"></div>
+      </div>
+      <div class="game-preview-card red" style="opacity:.35;pointer-events:none">
+        <div class="game-banner">
+          <div class="game-banner-glow"></div>
+        </div>
+        <div class="game-card-body" style="height:120px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Team Preview ── -->
+  <section class="home-team">
+    <div class="section-header center" style="margin-bottom:48px">
+      <p class="section-label vio reveal"><span data-i18n="team_label">Les bâtisseurs</span></p>
+      <h2 class="section-title reveal reveal-delay-1" data-i18n="team_title_html">Notre <span class="v">équipe</span>
+      </h2>
+      <p class="section-sub reveal reveal-delay-2" data-i18n="team_sub">Des passionnés qui mettent leur talent au
+        service de chaque expérience de jeu.</p>
+    </div>
+    <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
+      <a class="btn-primary" href="/team" data-i18n="nav_team">Voir l'équipe</a>
+      <a class="btn-outline" href="contact" data-i18n="team_join">Rejoindre l'équipe</a>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-inner">
+      <a class="footer-logo" href="/index">EXO <span>VOP</span></a>
+      <ul class="footer-links">
+        <li><a href="/index" data-i18n="nav_home">Accueil</a></li>
+        <li><a href="/game" data-i18n="nav_games">Jeux</a></li>
+        <li><a href="/team" data-i18n="nav_team">Équipe</a></li>
+        <li><a href="contact" data-i18n="nav_contact">Contact</a></li>
+      </ul>
+      <div class="footer-socials">
+        <a class="footer-social-btn" href="https://discord.gg/nHxq4ssHjT" target="_blank" rel="noopener noreferrer"
+          title="Discord">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M20.317 4.492c-1.53-.69-3.17-1.2-4.885-1.49a.075.075 0 0 0-.079.036c-.21.369-.444.85-.608 1.23a18.566 18.566 0 0 0-5.487 0 12.36 12.36 0 0 0-.617-1.23A.077.077 0 0 0 8.562 3c-1.714.29-3.354.8-4.885 1.491a.07.07 0 0 0-.032.027C.533 9.093-.32 13.555.099 17.961a.08.08 0 0 0 .031.055 20.03 20.03 0 0 0 5.993 2.98.078.078 0 0 0 .084-.026c.462-.62.874-1.275 1.226-1.963a.074.074 0 0 0-.041-.104 13.201 13.201 0 0 1-1.872-.878.075.075 0 0 1-.008-.125c.126-.093.252-.19.372-.287a.075.075 0 0 1 .078-.01c3.927 1.764 8.18 1.764 12.061 0a.075.075 0 0 1 .079.009c.12.098.245.195.372.288a.075.075 0 0 1-.006.125c-.598.344-1.22.635-1.873.877a.075.075 0 0 0-.041.105c.36.687.772 1.341 1.225 1.962a.077.077 0 0 0 .084.028 19.963 19.963 0 0 0 6.002-2.981.076.076 0 0 0 .032-.054c.5-5.094-.838-9.52-3.549-13.442a.06.06 0 0 0-.031-.028z" />
+          </svg>
+        </a>
+        <a class="footer-social-btn"
+          href="https://www.google.com/url?q=https%3A%2F%2Fwww.roblox.com%2Fshare%2Fg%2F792720570&sa=D&sntz=1&usg=AOvVaw18EB448imy35dgkYqT1ZbF"
+          target="_blank" rel="noopener noreferrer" title="Roblox">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <rect x="9" y="9" width="6" height="6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 <strong>Exo VOP</strong>. <span data-i18n="footer_rights">Tous droits réservés.</span><br>
+        <small>Made by <a href="https://webmake-studio.netlify.app/">WebMake Studio</a> — © Apache 2.0</small>
+      </p>
+      <p><small data-i18n="footer_disc">Studio indépendant non affilié à Roblox Corporation.</small></p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="asset/js/config.js"></script>
+  <script src="asset/js/global.js"></script>
+  <script src="asset/js/home.js"></script>
+</body>
+
+</html>
