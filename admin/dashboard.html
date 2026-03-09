@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Admin Exo VOP</title>
+  <link rel="stylesheet" href="../asset/css/global.css" />
+  <link rel="stylesheet" href="../asset/css/admin.css" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../media/logo-exo-vop(nobackground).png" />
+</head>
+<body>
+  <div id="cursor"></div><div id="cursor-ring"></div>
+  <canvas id="stars-canvas"></canvas>
+
+  <div class="admin-layout">
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <a class="sidebar-logo" href="../index.html">EXO <span>VOP</span></a>
+        <span class="sidebar-badge">Admin Panel</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="sidebar-section-label">Navigation</div>
+        <a class="sidebar-link" data-tab="overview" onclick="showTab('overview')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          Vue d'ensemble
+        </a>
+        <a class="sidebar-link" data-tab="announcements" onclick="showTab('announcements')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Annonces
+        </a>
+        <a class="sidebar-link" data-tab="team" onclick="showTab('team')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Équipe
+        </a>
+        <a class="sidebar-link" data-tab="games" onclick="showTab('games')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M7 12h.01"/><path d="M17 12h.01"/><path d="M9 10v4"/><path d="M7 12h4"/></svg>
+          Jeux
+        </a>
+        <a class="sidebar-link" data-tab="messages" onclick="showTab('messages')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Messages
+          <span id="badge-msg" style="display:none;margin-left:auto;background:var(--cyan);color:var(--bg);font-family:var(--font-head);font-size:.55rem;padding:2px 7px;border-radius:10px;font-weight:700;"></span>
+        </a>
+        <div class="sidebar-section-label">Liens rapides</div>
+        <a class="sidebar-link" href="../index.html" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Voir le site
+        </a>
+        <a class="sidebar-link" data-tab="settings" onclick="showTab('settings')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Paramètres
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-user">
+          <strong id="admin-email">admin@exoVOP.com</strong>
+          Administrateur
+        </div>
+        <button class="btn-logout" onclick="adminLogout()">Déco.</button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <span class="admin-topbar-title" id="admin-topbar-title">🏠 Vue d'ensemble</span>
+        <div class="admin-topbar-actions" id="topbar-actions"></div>
+      </div>
+
+      <div class="admin-content">
+
+        <div class="admin-tab-content" id="tab-overview">
+          <div class="admin-stats">
+            <div class="admin-stat-card">
+              <div class="admin-stat-icon cyan">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </div>
+              <div>
+                <div class="admin-stat-number" id="stat-ann-count">—</div>
+                <div class="admin-stat-label">Annonces</div>
+              </div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="admin-stat-icon violet">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+              </div>
+              <div>
+                <div class="admin-stat-number" id="stat-team-count">—</div>
+                <div class="admin-stat-label">Membres</div>
+              </div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="admin-stat-icon red">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M9 10v4"/><path d="M7 12h4"/><path d="M15 12h.01"/><path d="M18 12h.01"/></svg>
+              </div>
+              <div>
+                <div class="admin-stat-number" id="stat-games-count">—</div>
+                <div class="admin-stat-label">Jeux</div>
+              </div>
+            </div>
+            <div class="admin-stat-card">
+              <div class="admin-stat-icon green">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <div class="admin-stat-number" id="stat-msg-count">—</div>
+                <div class="admin-stat-label">Messages</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:8px">
+            <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:24px;">
+              <h3 style="font-family:var(--font-head);font-size:.88rem;color:var(--white);letter-spacing:1px;margin-bottom:16px;">Actions rapides</h3>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <button onclick="showTab('announcements');setTimeout(()=>openAnnModal('add'),100)" style="padding:11px 18px;border-radius:9px;background:rgba(0,229,255,.07);border:1px solid rgba(0,229,255,.2);color:var(--cyan);font-family:var(--font-head);font-size:.72rem;letter-spacing:1px;text-align:left;transition:background .2s;display:flex;align-items:center;gap:8px;">
+                  <span>➕</span> Nouvelle annonce
+                </button>
+                <button onclick="showTab('team');setTimeout(()=>openMembModal('add'),100)" style="padding:11px 18px;border-radius:9px;background:rgba(123,47,255,.07);border:1px solid rgba(123,47,255,.2);color:var(--violet);font-family:var(--font-head);font-size:.72rem;letter-spacing:1px;text-align:left;transition:background .2s;display:flex;align-items:center;gap:8px;">
+                  <span>👤</span> Ajouter un membre
+                </button>
+                <button onclick="showTab('games');setTimeout(()=>openGameModal('add'),100)" style="padding:11px 18px;border-radius:9px;background:rgba(255,61,90,.07);border:1px solid rgba(255,61,90,.2);color:var(--red);font-family:var(--font-head);font-size:.72rem;letter-spacing:1px;text-align:left;transition:background .2s;display:flex;align-items:center;gap:8px;">
+                  <span>🎮</span> Ajouter un jeu
+                </button>
+                <button onclick="showTab('messages')" style="padding:11px 18px;border-radius:9px;background:rgba(0,255,136,.07);border:1px solid rgba(0,255,136,.2);color:var(--green);font-family:var(--font-head);font-size:.72rem;letter-spacing:1px;text-align:left;transition:background .2s;display:flex;align-items:center;gap:8px;">
+                  <span>📬</span> Voir les messages
+                </button>
+              </div>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:24px;">
+              <h3 style="font-family:var(--font-head);font-size:.88rem;color:var(--white);letter-spacing:1px;margin-bottom:16px;">🎮 Jeux</h3>
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div id="overview-games-list" style="display:flex;flex-direction:column;gap:8px">
+                  <div style="color:var(--text-dim);font-size:.82rem">Chargement...</div>
+                </div>
+                <button onclick="showTab('games')" style="margin-top:6px;padding:9px 14px;border-radius:8px;background:rgba(255,61,90,.07);border:1px solid rgba(255,61,90,.2);color:var(--red);font-family:var(--font-head);font-size:.68rem;letter-spacing:1px;text-align:left;display:flex;align-items:center;gap:8px;">
+                  🎮 Gérer les jeux
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="admin-tab-content" id="tab-announcements">
+          <div class="admin-table-wrap">
+            <div class="admin-table-header">
+              <span class="admin-table-title">📢 Gestion des annonces</span>
+              <button class="btn-ghost" onclick="openAnnModal('add')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+                Nouvelle annonce
+              </button>
+            </div>
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Titre</th>
+                  <th>Jeu</th>
+                  <th>Date</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ann-tbody">
+                <tr><td colspan="5" style="text-align:center;padding:40px;color:var(--text-dim)">Chargement...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="admin-tab-content" id="tab-team">
+          <div class="admin-table-wrap">
+            <div class="admin-table-header">
+              <span class="admin-table-title">👥 Gestion de l'équipe</span>
+              <button class="btn-ghost" onclick="openMembModal('add')">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+                Nouveau membre
+              </button>
+            </div>
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Membre</th>
+                  <th>Rôle</th>
+                  <th>Description</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="team-tbody">
+                <tr><td colspan="4" style="text-align:center;padding:40px;color:var(--text-dim)">Chargement...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="admin-tab-content" id="tab-messages">
+          <div class="admin-table-wrap">
+            <div class="admin-table-header">
+              <span class="admin-table-title">📬 Messages de contact</span>
+              <button class="btn-ghost" onclick="loadAdminMessages()" style="display:flex;align-items:center;gap:6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.07-8.03"/></svg>
+                Actualiser
+              </button>
+            </div>
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Expéditeur</th>
+                  <th>Email</th>
+                  <th>Sujet</th>
+                  <th>Aperçu</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="msg-tbody">
+                <tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-dim)">Chargement...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+        <div class="admin-tab-content" id="tab-games">
+          <div class="admin-table-wrap">
+            <div class="admin-table-header">
+              <span class="admin-table-title">🎮 Gestion des jeux</span>
+              <button class="btn-ghost" onclick="openGameModal('add')" style="display:flex;align-items:center;gap:6px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+                Nouveau jeu
+              </button>
+            </div>
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Jeu</th>
+                  <th>Genre</th>
+                  <th>Lien Roblox</th>
+                  <th>Joueurs max</th>
+                  <th>Statut</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="games-tbody">
+                <tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-dim)">Chargement...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="admin-tab-content" id="tab-settings">
+          <div style="max-width:600px">
+            <h2 style="font-family:var(--font-head);font-size:1rem;color:var(--white);margin-bottom:24px;letter-spacing:1px;">⚙️ Configuration Supabase</h2>
+            <div style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:var(--radius);padding:28px;margin-bottom:20px;">
+              <p style="font-size:.88rem;color:var(--text-dim);margin-bottom:18px;line-height:1.7;">
+                Éditez le fichier <code style="background:rgba(0,229,255,.1);color:var(--cyan);padding:2px 7px;border-radius:4px;font-size:.82rem;">asset/js/config.js</code> pour configurer votre connexion Supabase.
+              </p>
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <span style="color:var(--green);font-size:1rem;">✓</span>
+                  <span style="font-size:.85rem;color:var(--text);">Remplacez <code style="color:var(--cyan);">VOTRE_PROJET</code> par l'URL de votre projet Supabase</span>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <span style="color:var(--green);font-size:1rem;">✓</span>
+                  <span style="font-size:.85rem;color:var(--text);">Remplacez <code style="color:var(--cyan);">VOTRE_CLE_ANON</code> par votre clé anonyme publique</span>
+                </div>
+              </div>
+            </div>
+            <div style="background:var(--card-bg);border:1px solid rgba(0,229,255,.15);border-radius:var(--radius);padding:28px;">
+              <h3 style="font-family:var(--font-head);font-size:.85rem;color:var(--white);margin-bottom:16px;">SQL à exécuter dans Supabase</h3>
+              <pre style="background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.06);border-radius:9px;padding:18px;font-size:.75rem;color:var(--text);overflow-x:auto;line-height:1.7;white-space:pre-wrap;">CREATE TABLE announcements (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  title text NOT NULL, content text NOT NULL,
+  game text, -- slug du jeu (ex: silix_rp, kill_a_monster, general...) — pas de contrainte fixe
+  image_url text, published boolean DEFAULT true,
+  created_at timestamptz DEFAULT now()
+);
+CREATE TABLE team_members (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  name text NOT NULL, role text NOT NULL, description text,
+  avatar_initial text, avatar_url text, sort_order integer DEFAULT 0,
+  created_at timestamptz DEFAULT now()
+);
+CREATE TABLE contact_messages (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  name text, email text, subject text, message text,
+  created_at timestamptz DEFAULT now()
+);
+ALTER TABLE announcements    ENABLE ROW LEVEL SECURITY;
+ALTER TABLE team_members     ENABLE ROW LEVEL SECURITY;
+ALTER TABLE contact_messages ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "public_read_ann"  ON announcements    FOR SELECT USING (published=true);
+CREATE POLICY "public_read_team" ON team_members     FOR SELECT USING (true);
+CREATE POLICY "public_insert_msg"  ON contact_messages FOR INSERT WITH CHECK (true);
+-- Politique de lecture admin (auth.uid() IS NOT NULL = utilisateur connecté)
+CREATE POLICY "admin_select_msg"   ON contact_messages FOR SELECT USING (auth.uid() IS NOT NULL);
+CREATE POLICY "admin_delete_msg"   ON contact_messages FOR DELETE USING (auth.uid() IS NOT NULL);
+CREATE POLICY "auth_all_ann"  ON announcements    FOR ALL USING (auth.uid() IS NOT NULL);
+CREATE POLICY "auth_all_team" ON team_members     FOR ALL USING (auth.uid() IS NOT NULL);
+-- Table jeux
+-- Si la table announcements existe déjà avec l'ancienne contrainte, exécutez :
+-- ALTER TABLE announcements DROP CONSTRAINT IF EXISTS announcements_game_check;
+
+CREATE TABLE IF NOT EXISTS games (
+  id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
+  name text NOT NULL,
+  slug text NOT NULL UNIQUE,
+  genre text,
+  description text,
+  cover_url text,
+  roblox_url text,
+  max_players integer DEFAULT 10,
+  active boolean DEFAULT true,
+  sort_order integer DEFAULT 0,
+  created_at timestamptz DEFAULT now()
+);
+ALTER TABLE games ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "public_read_games" ON games FOR SELECT USING (active=true);
+CREATE POLICY "auth_all_games"    ON games FOR ALL USING (auth.uid() IS NOT NULL);</pre>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="modal-ann">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span class="modal-title" id="modal-ann-title">Nouvelle annonce</span>
+        <button class="btn-modal-close" onclick="closeAnnModal()">✕</button>
+      </div>
+      <form class="modal-form" id="form-ann">
+        <div class="form-group">
+          <label>Titre *</label>
+          <input type="text" name="title" placeholder="Titre de l'annonce" required />
+        </div>
+        <div class="form-group">
+          <label>Jeu *</label>
+          <select name="game" id="ann-game-select" required>
+            <option value="general">🌐 Général</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Contenu *</label>
+          <textarea name="content" rows="5" placeholder="Contenu de l'annonce..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label>URL de l'image (optionnel)</label>
+          <input type="url" name="image_url" placeholder="https://..." />
+        </div>
+        <div class="form-group">
+          <div class="toggle-row">
+            <label>Publié</label>
+            <label class="toggle-switch">
+              <input type="checkbox" name="published" checked />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-cancel" onclick="closeAnnModal()">Annuler</button>
+          <button type="button" class="btn-modal-save" id="btn-save-ann" onclick="saveAnnouncement()">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-memb">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span class="modal-title" id="modal-memb-title">Nouveau membre</span>
+        <button class="btn-modal-close" onclick="closeMembModal()">✕</button>
+      </div>
+      <form class="modal-form" id="form-memb">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class="form-group">
+            <label>Pseudo / Nom *</label>
+            <input type="text" name="name" placeholder="PseudoRoblox" required />
+          </div>
+          <div class="form-group">
+            <label>Initiale avatar</label>
+            <input type="text" name="avatar_initial" placeholder="P" maxlength="2" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Rôle *</label>
+          <input type="text" name="role" placeholder="Lead Developer, Builder..." required />
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea name="description" rows="3" placeholder="Courte description du membre..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>URL de l'avatar (optionnel)</label>
+          <input type="url" name="avatar_url" placeholder="https://..." />
+        </div>
+        <div class="form-group">
+          <label>Ordre d'affichage</label>
+          <input type="number" name="sort_order" placeholder="0" min="0" value="0" />
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-cancel" onclick="closeMembModal()">Annuler</button>
+          <button type="button" class="btn-modal-save" id="btn-save-memb" onclick="saveMember()">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-msg">
+    <div class="modal-box" style="max-width:600px">
+      <div class="modal-header">
+        <span class="modal-title">✉️ Message reçu</span>
+        <button class="btn-modal-close" onclick="closeMsgModal()">✕</button>
+      </div>
+      <div id="msg-detail" style="background:rgba(0,0,0,.2);border:1px solid var(--card-border);border-radius:10px;padding:18px;margin-bottom:20px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;">
+          <div>
+            <div style="font-family:var(--font-head);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">De</div>
+            <div id="msg-detail-name" style="color:var(--white);font-size:.92rem;font-weight:600;"></div>
+          </div>
+          <div>
+            <div style="font-family:var(--font-head);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Email</div>
+            <div id="msg-detail-email" style="color:var(--cyan);font-size:.88rem;"></div>
+          </div>
+        </div>
+        <div style="margin-bottom:14px;">
+          <div style="font-family:var(--font-head);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);margin-bottom:4px;">Sujet</div>
+          <div id="msg-detail-subject" style="color:var(--violet);font-size:.88rem;font-weight:600;"></div>
+        </div>
+        <div>
+          <div style="font-family:var(--font-head);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);margin-bottom:8px;">Message</div>
+          <div id="msg-detail-content" style="color:var(--text);font-size:.9rem;line-height:1.7;white-space:pre-wrap;"></div>
+        </div>
+      </div>
+      <div class="modal-form">
+        <div class="form-group">
+          <label>✏️ Répondre à cet utilisateur</label>
+          <textarea id="msg-reply-text" rows="5" placeholder="Écrivez votre réponse ici..." style="background:var(--card-bg);border:1px solid var(--card-border);border-radius:9px;padding:12px 14px;color:var(--white);font-family:var(--font-body);font-size:.9rem;outline:none;resize:vertical;width:100%;transition:border-color .2s;"></textarea>
+        </div>
+        <p style="font-size:.75rem;color:var(--text-dim);margin-top:-6px;">
+          ⚠️ La réponse sera envoyée via votre client email par défaut (mailto:). Pour un envoi automatique, connectez un service SMTP (ex: Resend, SendGrid) à Supabase Edge Functions.
+        </p>
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-cancel" onclick="closeMsgModal()">Fermer</button>
+          <button type="button" class="btn-modal-save" id="btn-reply-msg" onclick="replyToMessage()" style="background:linear-gradient(135deg,var(--green),var(--cyan));color:var(--bg);">
+            📤 Répondre
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-game">
+    <div class="modal-box" style="max-width:560px">
+      <div class="modal-header">
+        <span class="modal-title" id="modal-game-title">Nouveau jeu</span>
+        <button class="btn-modal-close" onclick="closeGameModal()">✕</button>
+      </div>
+      <form class="modal-form" id="form-game">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class="form-group">
+            <label>Nom du jeu *</label>
+            <input type="text" name="name" placeholder="Silix RP" required />
+          </div>
+          <div class="form-group">
+            <label>Slug (identifiant) *</label>
+            <input type="text" name="slug" placeholder="silix_rp" required />
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+          <div class="form-group">
+            <label>Genre</label>
+            <input type="text" name="genre" placeholder="Jeu de rôle, Action..." />
+          </div>
+          <div class="form-group">
+            <label>Joueurs max</label>
+            <input type="number" name="max_players" placeholder="10" min="1" value="10" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea name="description" rows="3" placeholder="Courte description du jeu..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>URL de la couverture (image)</label>
+          <input type="url" name="cover_url" placeholder="https://..." />
+        </div>
+        <div class="form-group">
+          <label>Lien Roblox</label>
+          <input type="url" name="roblox_url" placeholder="https://www.roblox.com/games/..." />
+        </div>
+        <div class="form-group">
+          <label>Ordre d'affichage</label>
+          <input type="number" name="sort_order" placeholder="0" min="0" value="0" />
+        </div>
+        <div class="form-group">
+          <div class="toggle-row">
+            <label>Jeu actif (visible sur le site)</label>
+            <label class="toggle-switch">
+              <input type="checkbox" name="active" checked />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn-modal-cancel" onclick="closeGameModal()">Annuler</button>
+          <button type="button" class="btn-modal-save" id="btn-save-game" onclick="saveGame()">Enregistrer</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../asset/js/config.js"></script>
+  <script src="../asset/js/global.js"></script>
+  <script src="../asset/js/admin.js"></script>
+</body>
+</html>
