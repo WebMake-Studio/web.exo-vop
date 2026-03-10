@@ -44,7 +44,7 @@
     document.addEventListener('DOMContentLoaded', async () => {
       if (!db) return;
       const { data: { session } } = await db.auth.getSession();
-      if (session) window.location.href = './admin/dashboard';
+      if (session) window.location.href = '../admin/dashboard';
     });
   </script>
 </body>
